@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>http://finatra.info/finatra/blog/2016/02/04/announcing-the-release-of-finatra-2-dot-1-3/</loc>
+<lastmod>2016-02-04T20:14:20-08:00</lastmod>
+</url>
+<url>
 <loc>http://finatra.info/finatra/blog/2015/12/09/formally-introducing-finatra-2-dot-0/</loc>
 <lastmod>2015-12-09T10:07:06-08:00</lastmod>
 </url>

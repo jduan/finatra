@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Blog | Finatra]]></title>
   <link href="http://finatra.info/finatra/blog/categories/blog/atom.xml" rel="self"/>
   <link href="http://finatra.info/finatra/"/>
-  <updated>2016-02-04T20:09:43-08:00</updated>
+  <updated>2016-02-04T20:18:22-08:00</updated>
   <id>http://finatra.info/finatra/</id>
   <author>
     <name><![CDATA[Twitter]]></name>
@@ -12,6 +12,23 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Announcing the Release of Finatra 2.1.3, Now Publicly Available.]]></title>
+    <link href="http://finatra.info/finatra/blog/2016/02/04/announcing-the-release-of-finatra-2-dot-1-3/"/>
+    <updated>2016-02-04T20:14:20-08:00</updated>
+    <id>http://finatra.info/finatra/blog/2016/02/04/announcing-the-release-of-finatra-2-dot-1-3</id>
+    <content type="html"><![CDATA[<h3>Finatra <a href="https://github.com/twitter/finatra/releases/tag/v2.1.3">Release 2.1.3</a> is now available from <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.twitter.finatra%22%20AND%20v%3A%222.1.3%22">Maven Central</a>.</h3>
+
+<p>There are lots of improvements in this release. Please checkout the <a href="https://github.com/twitter/finatra/releases/tag/v2.1.3">v2.1.3</a> release tag on github for more information.</p>
+
+<p>As always, you can download the release from <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.twitter.finatra%22%20AND%20v%3A%222.1.3%22">Maven Central</a>.</p>
+
+<p>See the Finatra <a href="https://github.com/twitter/finatra">github page</a> or checkout our <a href="/finatra/user-guide">User Guide</a> for more information on getting started.</p>
+
+<p>&ndash; The <a href="https://groups.google.com/forum/#!forum/finatra-users">Finatra</a> Team</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Formally Introducing Finatra 2.0: "the Fast, Testable Scala Services Framework That Powers Twitter."]]></title>
@@ -100,23 +117,6 @@
 <p>You can download the release from <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.twitter.finatra%22%20AND%20v%3A%222.0.1%22">Maven Central</a>.</p>
 
 <p>For a full list of changes and updates see the diff <a href="https://github.com/twitter/finatra/compare/v2.0.0...v2.0.1">here</a>.</p>
-
-<p>See the Finatra <a href="https://github.com/twitter/finatra">github page</a> for more information on getting started.</p>
-
-<p>&ndash; The <a href="https://groups.google.com/forum/#!forum/finatra-users">Finatra</a> Team</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Announcing the Release of Finatra 2.0.0!]]></title>
-    <link href="http://finatra.info/finatra/blog/2015/09/09/announcing-the-release-of-finatra-2-dot-0-0/"/>
-    <updated>2015-09-09T13:27:47-07:00</updated>
-    <id>http://finatra.info/finatra/blog/2015/09/09/announcing-the-release-of-finatra-2-dot-0-0</id>
-    <content type="html"><![CDATA[<h4>We&rsquo;re pleased to announce the <a href="https://github.com/twitter/finatra/releases/tag/v2.0.0">release</a> of Finatra 2.0.0!</h4>
-
-<p>You can download the release from <a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.twitter.finatra%22%20AND%20v%3A%222.0.0%22">Maven Central</a>.</p>
-
-<p>For a full list of changes and updates see the diff <a href="https://github.com/twitter/finatra/compare/v2.0.0.M2...v2.0.0">here</a>.</p>
 
 <p>See the Finatra <a href="https://github.com/twitter/finatra">github page</a> for more information on getting started.</p>
 
