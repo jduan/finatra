@@ -1,25 +1,12 @@
 package com.twitter.hello.server;
 
-import java.util.Collection;
+import com.twitter.finagle.ListeningServer;
+import com.twitter.finatra.http.HttpServerJ;
+import com.twitter.finatra.http.routing.HttpRouter;
 
-import com.google.common.collect.ImmutableList;
-import com.google.inject.Module;
-
-import com.twitter.finatra.logging.modules.Slf4jBridgeModule$;
-import com.twitter.hello.HelloService;
-import com.twitter.inject.server.AbstractTwitterServer;
-
-public class HelloWorldServer extends AbstractTwitterServer {
-
+public class HelloWorldServer extends HttpServerJ {
     @Override
-    public Collection<Module> javaModules() {
-        return ImmutableList.<Module>of(
-                Slf4jBridgeModule$.MODULE$);
-    }
-
-    @Override
-    public void appMain() {
-        HelloService helloService = injector().instance(HelloService.class);
-        System.out.println(helloService.hi("Bob"));
+    public void configureHttp(HttpRouter router) {
+        router.add(new UserController());
     }
 }

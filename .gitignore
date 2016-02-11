@@ -5,3 +5,4 @@
 classes/
 target/
 sbt-launch.jar
+*.log
