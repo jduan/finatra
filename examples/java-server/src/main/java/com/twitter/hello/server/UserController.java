@@ -4,9 +4,9 @@ import com.twitter.finagle.http.ParamMap;
 import com.twitter.finagle.http.Request;
 import com.twitter.finagle.http.Response;
 import com.twitter.finatra.http.ControllerJ;
-import com.twitter.finatra.http.MyAction;
+import com.twitter.finatra.http.Action;
 
-class UserAction implements MyAction {
+class UserAction implements Action {
     public Response action(Request request) {
         ParamMap params = request.params();
         Integer id = (Integer) params.getInt("id").get();
