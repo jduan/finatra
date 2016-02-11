@@ -162,8 +162,8 @@
 
 <ul>
 <li><a href="https://github.com/twitter/util">twitter/util</a> <a href="#flags">Flags</a> can be defined inside modules. This allows for re-usable scoping of external configuration that can be composed into a server via the module.</li>
-<li>Prefer using an <code>@Provides</code> methods over using the <a href="https://github.com/google/guice/wiki/InstanceBindings"><em>toInstance</em> bind DSL</a>.</li>
-<li>Usually modules are Scala <em>objects</em> since they contain no state and usage of the module is less verbose.</li>
+<li>Prefer using <code>@Provides</code>-annotated methods over using the <a href="https://github.com/google/guice/wiki/InstanceBindings"><em>toInstance</em> bind DSL</a>.</li>
+<li>Usually modules are Scala <em>objects</em> since they contain no state and makes usage of the module less verbose.</li>
 <li>Remember to add <code>@Singleton</code> to your <code>@Provides</code> method if you require only <strong>one</strong> instance per JVM process.</li>
 <li>Generally, modules are only required for instantiating classes that you don&rsquo;t control. Otherwise, you would simply add the <a href="https://github.com/google/guice/wiki/JSR330">JSR-330</a> annotations directly to the class. For example, suppose you need to create an <code>ThirdPartyFoo</code> class which comes from a thirdparty jar. You could create the following Guice module to construct a singleton <code>ThirdPartyFoo</code> class which is created with a key provided through a command line flag.</li>
 </ul>
@@ -235,6 +235,119 @@
 <div></div>
 
 
+<h3><a class="anchor" name="binding-annotations" href="#binding-annotations">Binding Annotations</a></h3>
+
+<hr />
+
+<p>Occasionally, you may want multiple bound instances of the same type. For instance you may want both a FooHttpClient and a BarHttpClient. To do this we recommend creating specific <a href="https://github.com/google/guice/wiki/BindingAnnotations">binding annotations</a>.</p>
+
+<h4>Define an Annotation</h4>
+
+<p>Defining a binding annotation is a few lines of java code plus imports. We recommend that you put this in it&rsquo;s own <code>.java</code> file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">package</span> <span class="nn">example.http.clients.annotations</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">import</span> <span class="nn">java.lang.annotation.Retention</span><span class="o">;</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">java.lang.annotation.Target</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">import</span> <span class="nn">com.google.inject.BindingAnnotation</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">import</span> <span class="nn">static</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="nc">ElementType</span><span class="o">.</span><span class="nc">PARAMETER</span><span class="o">;</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">static</span> <span class="n">java</span><span class="o">.</span><span class="n">lang</span><span class="o">.</span><span class="n">annotation</span><span class="o">.</span><span class="nc">RetentionPolicy</span><span class="o">.</span><span class="nc">RUNTIME</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nd">@BindingAnnotation</span>
+</span><span class='line'><span class="nd">@Target</span><span class="o">(</span><span class="nc">PARAMETER</span><span class="o">)</span>
+</span><span class='line'><span class="nd">@Retention</span><span class="o">(</span><span class="nc">RUNTIME</span><span class="o">)</span>
+</span><span class='line'><span class="n">public</span> <span class="nd">@interface</span> <span class="nc">FooClient</span> <span class="o">{}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>For more information on the meta-annotations see the Google Guice <a href="https://github.com/google/guice/wiki/BindingAnnotations">documentation on Binding Annotations</a>.</p>
+
+<h4>Create a Binding with the Annotation</h4>
+
+<p>In your Module, then annotate the <code>@Provides</code> method that is instantiating the specific instance with the Binding Annotation, e.g.,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">object</span> <span class="nc">MyHttpClientsModule</span> <span class="k">extends</span> <span class="nc">TwitterModule</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">val</span> <span class="n">fooClientDestination</span> <span class="k">=</span> <span class="n">flag</span><span class="o">(</span><span class="s">&quot;foo.client.dest&quot;</span><span class="o">,</span> <span class="s">&quot;Foo Client Destination&quot;</span><span class="o">)</span>
+</span><span class='line'>  <span class="k">val</span> <span class="n">barClientDestination</span> <span class="k">=</span> <span class="n">flag</span><span class="o">(</span><span class="s">&quot;bar.client.dest&quot;</span><span class="o">,</span> <span class="s">&quot;Bar Client Destination&quot;</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Singleton</span>
+</span><span class='line'>  <span class="nd">@Provides</span>
+</span><span class='line'>  <span class="nd">@FooClient</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">providesFooHttpClient</span><span class="k">:</span> <span class="kt">HttpClient</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">new</span> <span class="nc">HttpClient</span><span class="o">(</span><span class="n">fooClientDestination</span><span class="o">())</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Singleton</span>
+</span><span class='line'>  <span class="nd">@Provides</span>
+</span><span class='line'>  <span class="nd">@BarClient</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">providesBarHttpClient</span><span class="k">:</span> <span class="kt">HttpClient</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">new</span> <span class="nc">HttpClient</span><span class="o">(</span><span class="n">barClientDestination</span><span class="o">())</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<div></div>
+
+
+<h4>Depend on the Annotation</h4>
+
+<p>Then to depend on the annotated binding, just apply the annotation to the injected parameter:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">class</span> <span class="nc">MyService</span> <span class="nd">@Inject</span><span class="o">()(</span>
+</span><span class='line'>  <span class="nd">@FooClient</span> <span class="n">fooHttpClient</span><span class="k">:</span> <span class="kt">HttpClient</span><span class="o">,</span>
+</span><span class='line'>  <span class="nd">@BarClient</span> <span class="n">barHttpClient</span><span class="k">:</span> <span class="kt">HttpClient</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<div></div>
+
+
+<h4>Benefits Over Using <a href="https://github.com/google/guice/wiki/BindingAnnotations#named"><code>@Named</code></a> Binding Annotation</h4>
+
+<p>You could also achieve the same behavior using the <a href="https://github.com/google/guice/wiki/BindingAnnotations#named"><code>@Named</code></a> binding annotation. However we&rsquo;ve found that creating specific binding annotations avoids potential naming collisions. Additionally, being able to find all usages of the annotation by type is beneficial over a text-search for the string used in <code>@Named</code>.</p>
+
 <h3><a class="anchor" name="flags" href="#flags">Flags</a></h3>
 
 <hr />
@@ -247,7 +360,7 @@
 
 <h4><code>@Flag</code> annotation</h4>
 
-<p>Flag values can be injected into classes (and provider methods), by using the <code>@Flag</code> annotation:</p>
+<p>Flag is a <a href="#binding-annotations">binding annotation</a>. This annotation allows flag values to be injected into classes (and provider methods), by using the <code>@Flag</code> annotation:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -342,6 +455,29 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p><code>TwitterModule#flag</code> is parameterized to return a Flag of type <code>T</code> where <code>T</code> is the type of the arguement passed as the default. If you do not specify a default value then you must explicitly parameterize your call to <code>TwitterModule#flag</code>, e.g,</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">object</span> <span class="nc">MyModule1</span> <span class="k">extends</span> <span class="nc">TwitterModule</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">val</span> <span class="n">key</span> <span class="k">=</span> <span class="n">flag</span><span class="o">[</span><span class="kt">String</span><span class="o">](</span><span class="s">&quot;key&quot;</span><span class="o">,</span> <span class="s">&quot;The key to use&quot;</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nd">@Singleton</span>
+</span><span class='line'>  <span class="nd">@Provides</span>
+</span><span class='line'>  <span class="k">def</span> <span class="n">providesThirdPartyFoo</span><span class="k">:</span> <span class="kt">ThirdPartyFoo</span> <span class="o">=</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">new</span> <span class="nc">ThirdPartyFoo</span><span class="o">(</span><span class="n">key</span><span class="o">())</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
 <h3><a class="anchor" name="futures" href="#futures">Futures</a> (<code>com.twitter.util.Future</code> vs. <code>scala.concurrent.Future</code>)</h3>
 
 <hr />
@@ -350,7 +486,7 @@
 
 <p><nav>
   <ul class="pager">
-    <li></li>
+  <li class="previous"><a href="/finatra/user-guide/twitter-server-basics"><span aria-hidden="true">&larr;</span>&nbsp;TwitterServer&nbsp;Basics</a></li>
     <li class="next"><a href="/finatra/user-guide/build-new-http-server">&nbsp;Building&nbsp;a&nbsp;new&nbsp;HTTP&nbsp;Server&nbsp;<span aria-hidden="true">&rarr;</span></a></li>
   </ul>
 </nav></p>

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Finatra User Guide - Finatra</title>
+    <title>TwitterServer Basics - Finatra</title>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:800">
     <link rel="stylesheet" type="text/css" href="/finatra/javascripts/highlight/styles/idea.css">
@@ -96,108 +96,44 @@
 
           <div>
 <article role="article">
-  
-  <header>
-    <h1 class="entry-title">Finatra User Guide</h1>
-    
-  </header>
-  
-  <p>Finatra is based on <a href="http://twitter.github.io/finagle/guide/">Finagle</a> and <a href="http://twitter.github.io/twitter-server/">TwitterServer</a> and it is highly recommended that you familiarize yourself with those frameworks before getting started.</p>
-
-<h3>Topics:</h3>
-
-<ul>
-<li><a href="/finatra/user-guide/twitter-server-basics">TwitterServer Basics</a></li>
-<li><a href="/finatra/user-guide/getting-started">Getting Started</a>
-
-<ul>
-<li><a href="/finatra/user-guide/getting-started#modules">Modules</a></li>
-<li><a href="/finatra/user-guide/getting-started#binding-annotations">Binding Annotations</a></li>
-<li><a href="/finatra/user-guide/getting-started#flags">Flags</a></li>
-<li><a href="/finatra/user-guide/getting-started#futures">Futures</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/build-new-http-server">Building a new HTTP Server</a>
-
-<ul>
-<li><a href="/finatra/user-guide/build-new-http-server#server-definition">Create a Server Definition</a></li>
-<li><a href="/finatra/user-guide/build-new-http-server#override-defaults">Override Default Behavior</a></li>
-<li><a href="/finatra/user-guide/build-new-http-server/controller.html">Add a Controller</a>
-
-<ul>
-<li><a href="/finatra/user-guide/build-new-http-server/controller.html#controllers-and-routing">Routing</a></li>
-<li><a href="/finatra/user-guide/build-new-http-server/controller.html#requests">Requests</a></li>
-<li><a href="/finatra/user-guide/build-new-http-server/controller.html#responses">Responses</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/build-new-http-server/filter.html">Add Filters</a>
-
-<ul>
-<li><a href="/finatra/user-guide/build-new-http-server/filter.html#request-scope">Request Scope</a>
-
-<ul>
-<li><a href="/finatra/user-guide/build-new-http-server/filter.html#request-ctx">Using <code>com.twitter.finagle.http.Request#ctx</code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/build-new-http-server/exceptions.html">Add an ExceptionMapper</a></li>
-<li><a href="/finatra/user-guide/build-new-http-server/warmup.html">Implement a Server &ldquo;Warmup&rdquo; Handler</a></li>
-<li><a href="/finatra/user-guide/build-new-http-server/warmup.html#more-information">More information</a></li>
-</ul>
-</li>
-<li>Building a new Thrift Server - <em>*detailed-documentation coming soon*</em></li>
-<li><a href="/finatra/user-guide/json">Working with JSON</a>
-
-<ul>
-<li><a href="/finatra/user-guide/json#configuration">Configuration</a></li>
-<li><a href="/finatra/user-guide/json#jackson-customization">Customization</a></li>
-<li><a href="/finatra/user-guide/json#routing-json">Integration with Routing</a></li>
-<li><a href="/finatra/user-guide/json#validation-framework">Validation Framework</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/files">Working with Files</a>
-
-<ul>
-<li><a href="/finatra/user-guide/files#file-server">File Server</a></li>
-<li><a href="/finatra/user-guide/files#mustache">Mustache Templating</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/logging">Logging</a>
-
-<ul>
-<li><a href="/finatra/user-guide/logging#basics">Basics</a></li>
-<li><a href="/finatra/user-guide/logging#logback">Logback</a></li>
-<li><a href="/finatra/user-guide/logging#mdc">Mapped Diagnostic Context Filter</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/testing">Testing</a>
-
-<ul>
-<li><a href="/finatra/user-guide/testing#testing-types">Types of Tests</a></li>
-<li><a href="/finatra/user-guide/testing#embedded-server">Embedded Servers/Apps</a></li>
-<li><a href="/finatra/user-guide/testing#override-modules">Override Modules</a></li>
-<li><a href="/finatra/user-guide/testing#at-bind">Using <code>@Bind</code></a></li>
-<li><a href="/finatra/user-guide/testing#test-helpers">Test Helper Classes</a>
-
-<ul>
-<li><a href="/finatra/user-guide/testing#feature-tests">Feature Tests</a></li>
-<li><a href="/finatra/user-guide/testing#integration-tests">Integration Tests</a></li>
-<li><a href="/finatra/user-guide/testing#http-tests">Http Tests</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/testing#startup-tests">Startup Tests</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/v1-migration">V1 Migration FAQ</a></li>
-</ul>
+  <ol class="breadcrumb">
+  <li><a href="/finatra/user-guide">User Guide</a></li>
+  <li class="active">TwitterServer Basics</li>
+</ol>
 
 
-<h3>Getting Involved</h3>
+<p>All Finatra servers are <a href="https://github.com/twitter/twitter-server">TwitterServer</a> based services and thus it helps to understand some basics of a <a href="https://github.com/twitter/twitter-server">TwitterServer</a>.</p>
 
-<p>Finatra is an open source project that welcomes contributions from the greater community. We’re thankful for the many people who have already contributed and if you’re interested, please read the <a href="https://github.com/twitter/finatra/blob/master/CONTRIBUTING.md">contributing</a> guidelines.</p>
+<h3>HTTP Admin Interface</h3>
 
-<p>For support feel free to follow and/or tweet at the <a href="https://twitter.com/finatra">@finatra</a> Twitter account, post questions to the <a href="https://gitter.im/">Gitter</a> <a href="https://gitter.im/twitter/finatra">chat room</a>, or email the <a href="https://groups.google.com/forum/#!forum/finatra-users">finatra-users</a> Google group: <a href="mailto:finatra-users@googlegroups.com">finatra-users@googlegroups.com</a>.</p>
+<p><a href="https://github.com/twitter/twitter-server">TwitterServer</a> based services have the option to start an <a href="https://twitter.github.io/twitter-server/Features.html#http-admin-interface">HTTP Admin Interface</a> bound to a port configurable via the <code>-admin.port</code> flag. If you want to serve an external interface this will be bound to a separate port configurable via either the <code>-http.port</code>, <code>-https.port</code> or <code>-thrift.port</code> flags, depending.</p>
+
+<p>Some deployment environments such as <a href="https://www.heroku.com/">Heroku</a>, <a href="https://www.appfog.com/">AppFog</a>, and <a href="https://www.openshift.com">OpenShift</a> only allow a single port to be used when deploying an application. In these cases, you can programmatically disable the TwitterServer <a href="https://twitter.github.io/twitter-server/Features.html#http-admin-interface">HTTP Admin Interface</a> as such:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">class</span> <span class="nc">ExampleServer</span> <span class="k">extends</span> <span class="nc">HttpServer</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">override</span> <span class="k">val</span> <span class="n">disableAdminHttpServer</span> <span class="k">=</span> <span class="kc">true</span>
+</span><span class='line'>  <span class="o">...</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<div></div>
+
+
+<p>Since the <code>-admin.port</code> flag is currently still required to have a value by <a href="https://github.com/twitter/twitter-server">TwitterServer</a> you should set the <code>-admin.port</code> and your external interface port e.g., <code>-http.port</code> flags to the <strong>same value</strong> in addition to specifying <code>override val disableAdminHttpServer = true</code> as above.</p>
+
+<p>For a working example of disabling the TwitterServer <a href="https://twitter.github.io/twitter-server/Features.html#http-admin-interface">HTTP Admin Interface</a>, see the <a href="https://www.heroku.com/">Heroku</a> <a href="https://github.com/twitter/finatra/tree/master/examples/hello-world-heroku">hello-world example</a>.</p>
+
+<p><nav>
+  <ul class="pager">
+    <li></li>
+    <li class="next"><a href="/finatra/user-guide/getting-started">&nbsp;Getting&nbsp;Started&nbsp;<span aria-hidden="true">&rarr;</span></a></li>
+  </ul>
+</nav></p>
 
   
     <footer>

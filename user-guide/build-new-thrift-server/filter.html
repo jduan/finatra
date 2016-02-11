@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Finatra User Guide - Finatra</title>
+    <title>filter - Finatra</title>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans:800">
     <link rel="stylesheet" type="text/css" href="/finatra/javascripts/highlight/styles/idea.css">
@@ -98,110 +98,38 @@
 <article role="article">
   
   <header>
-    <h1 class="entry-title">Finatra User Guide</h1>
-    
+    <h1 class="entry-title">Filter</h1>
+    <p class="meta">
+
+
+
+
+<time class='entry-date' datetime='2016-02-04T20:57:00-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:57 pm</span></time></p>
   </header>
   
-  <p>Finatra is based on <a href="http://twitter.github.io/finagle/guide/">Finagle</a> and <a href="http://twitter.github.io/twitter-server/">TwitterServer</a> and it is highly recommended that you familiarize yourself with those frameworks before getting started.</p>
-
-<h3>Topics:</h3>
-
-<ul>
-<li><a href="/finatra/user-guide/twitter-server-basics">TwitterServer Basics</a></li>
-<li><a href="/finatra/user-guide/getting-started">Getting Started</a>
-
-<ul>
-<li><a href="/finatra/user-guide/getting-started#modules">Modules</a></li>
-<li><a href="/finatra/user-guide/getting-started#binding-annotations">Binding Annotations</a></li>
-<li><a href="/finatra/user-guide/getting-started#flags">Flags</a></li>
-<li><a href="/finatra/user-guide/getting-started#futures">Futures</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/build-new-http-server">Building a new HTTP Server</a>
-
-<ul>
-<li><a href="/finatra/user-guide/build-new-http-server#server-definition">Create a Server Definition</a></li>
-<li><a href="/finatra/user-guide/build-new-http-server#override-defaults">Override Default Behavior</a></li>
-<li><a href="/finatra/user-guide/build-new-http-server/controller.html">Add a Controller</a>
-
-<ul>
-<li><a href="/finatra/user-guide/build-new-http-server/controller.html#controllers-and-routing">Routing</a></li>
-<li><a href="/finatra/user-guide/build-new-http-server/controller.html#requests">Requests</a></li>
-<li><a href="/finatra/user-guide/build-new-http-server/controller.html#responses">Responses</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/build-new-http-server/filter.html">Add Filters</a>
-
-<ul>
-<li><a href="/finatra/user-guide/build-new-http-server/filter.html#request-scope">Request Scope</a>
-
-<ul>
-<li><a href="/finatra/user-guide/build-new-http-server/filter.html#request-ctx">Using <code>com.twitter.finagle.http.Request#ctx</code></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/build-new-http-server/exceptions.html">Add an ExceptionMapper</a></li>
-<li><a href="/finatra/user-guide/build-new-http-server/warmup.html">Implement a Server &ldquo;Warmup&rdquo; Handler</a></li>
-<li><a href="/finatra/user-guide/build-new-http-server/warmup.html#more-information">More information</a></li>
-</ul>
-</li>
-<li>Building a new Thrift Server - <em>*detailed-documentation coming soon*</em></li>
-<li><a href="/finatra/user-guide/json">Working with JSON</a>
-
-<ul>
-<li><a href="/finatra/user-guide/json#configuration">Configuration</a></li>
-<li><a href="/finatra/user-guide/json#jackson-customization">Customization</a></li>
-<li><a href="/finatra/user-guide/json#routing-json">Integration with Routing</a></li>
-<li><a href="/finatra/user-guide/json#validation-framework">Validation Framework</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/files">Working with Files</a>
-
-<ul>
-<li><a href="/finatra/user-guide/files#file-server">File Server</a></li>
-<li><a href="/finatra/user-guide/files#mustache">Mustache Templating</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/logging">Logging</a>
-
-<ul>
-<li><a href="/finatra/user-guide/logging#basics">Basics</a></li>
-<li><a href="/finatra/user-guide/logging#logback">Logback</a></li>
-<li><a href="/finatra/user-guide/logging#mdc">Mapped Diagnostic Context Filter</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/testing">Testing</a>
-
-<ul>
-<li><a href="/finatra/user-guide/testing#testing-types">Types of Tests</a></li>
-<li><a href="/finatra/user-guide/testing#embedded-server">Embedded Servers/Apps</a></li>
-<li><a href="/finatra/user-guide/testing#override-modules">Override Modules</a></li>
-<li><a href="/finatra/user-guide/testing#at-bind">Using <code>@Bind</code></a></li>
-<li><a href="/finatra/user-guide/testing#test-helpers">Test Helper Classes</a>
-
-<ul>
-<li><a href="/finatra/user-guide/testing#feature-tests">Feature Tests</a></li>
-<li><a href="/finatra/user-guide/testing#integration-tests">Integration Tests</a></li>
-<li><a href="/finatra/user-guide/testing#http-tests">Http Tests</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/testing#startup-tests">Startup Tests</a></li>
-</ul>
-</li>
-<li><a href="/finatra/user-guide/v1-migration">V1 Migration FAQ</a></li>
-</ul>
-
-
-<h3>Getting Involved</h3>
-
-<p>Finatra is an open source project that welcomes contributions from the greater community. We’re thankful for the many people who have already contributed and if you’re interested, please read the <a href="https://github.com/twitter/finatra/blob/master/CONTRIBUTING.md">contributing</a> guidelines.</p>
-
-<p>For support feel free to follow and/or tweet at the <a href="https://twitter.com/finatra">@finatra</a> Twitter account, post questions to the <a href="https://gitter.im/">Gitter</a> <a href="https://gitter.im/twitter/finatra">chat room</a>, or email the <a href="https://groups.google.com/forum/#!forum/finatra-users">finatra-users</a> Google group: <a href="mailto:finatra-users@googlegroups.com">finatra-users@googlegroups.com</a>.</p>
+  
 
   
     <footer>
+      <p class="meta">
+        
+        
+
+
+
+
+<time class='entry-date' datetime='2016-02-04T20:57:00-08:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>8:57 pm</span></time>
+        
+      </p>
       
+        <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://finatra.info/finatra/user-guide/build-new-thrift-server/filter.html" data-via="" data-counturl="http://finatra.info/finatra/user-guide/build-new-thrift-server/filter.html" >Tweet</a>
+  
+  
+  
+</div>
+
       
     </footer>
   

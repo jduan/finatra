@@ -107,55 +107,20 @@
 
 <hr />
 
-<p>If you want to apply a filter (or filters) to all added controllers you can do the following:</p>
+<h4><code>com.twitter.finatra.http.filters.CommonFilters</code></h4>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">DoEverythingModule</span>
-</span><span class='line'><span class="k">import</span> <span class="nn">ExampleController</span>
-</span><span class='line'><span class="k">import</span> <span class="nn">com.twitter.finagle.http.Request</span>
-</span><span class='line'><span class="k">import</span> <span class="nn">com.twitter.finatra.http.filters.AccessLoggingFilter</span>
-</span><span class='line'><span class="k">import</span> <span class="nn">com.twitter.finatra.http.routing.HttpRouter</span>
-</span><span class='line'><span class="k">import</span> <span class="nn">com.twitter.finatra.http.</span><span class="o">{</span><span class="nc">Controller</span><span class="o">,</span> <span class="nc">HttpServer</span><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">object</span> <span class="nc">ExampleServerMain</span> <span class="k">extends</span> <span class="nc">ExampleServer</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">ExampleServer</span> <span class="k">extends</span> <span class="nc">HttpServer</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">override</span> <span class="k">val</span> <span class="n">modules</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
-</span><span class='line'>    <span class="nc">DoEverythingModule</span><span class="o">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="k">override</span> <span class="k">def</span> <span class="n">configureHttp</span><span class="o">(</span><span class="n">router</span><span class="k">:</span> <span class="kt">HttpRouter</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">router</span><span class="o">.</span>
-</span><span class='line'>      <span class="n">filter</span><span class="o">[</span><span class="kt">AccessLoggingFilter</span><span class="o">[</span><span class="kt">Request</span><span class="o">]].</span>
-</span><span class='line'>      <span class="n">add</span><span class="o">[</span><span class="kt">ExampleController</span><span class="o">]</span>
-</span><span class='line'>  <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
+<p>Finatra composes some commonly used filters into <a href="https://github.com/twitter/finatra/blob/master/http/src/main/scala/com/twitter/finatra/http/filters/CommonFilters.scala"><code>com.twitter.finatra.http.filters.CommonFilters</code></a>. <code>CommonFilters</code> can be added in the same manner as any other filter.</p>
 
+<h4>Global Filters</h4>
 
-<div></div>
+<p>Filters by default execute <strong>after</strong> route matching. Meaning, for a given
+request the URI path is matched in the routing table before executing any filter. If you
+need to be able to run a filter <em>before</em> route matching, you can add the filter via
+<code>router#filterBeforeRouting</code>, this is especially useful if the filter manually inspects to
+see if it should function on a given request URI path that may not exist in the routing table (e.g., is not
+defined by any controller added to the server).</p>
 
-
-<p>It is also possible to add a filter per controller,</p>
+<p>If you want to apply a filter (or filters) to <strong>all</strong> added controllers you can do the following:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -180,6 +145,59 @@
 <span class='line-number'>21</span>
 </pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">DoEverythingModule</span>
 </span><span class='line'><span class="k">import</span> <span class="nn">ExampleController</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">com.twitter.finagle.http.Request</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">com.twitter.finatra.http.filters.AccessLoggingFilter</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">com.twitter.finatra.http.routing.HttpRouter</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">com.twitter.finatra.http.</span><span class="o">{</span><span class="nc">Controller</span><span class="o">,</span> <span class="nc">HttpServer</span><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">object</span> <span class="nc">ExampleServerMain</span> <span class="k">extends</span> <span class="nc">ExampleServer</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">ExampleServer</span> <span class="k">extends</span> <span class="nc">HttpServer</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">override</span> <span class="k">val</span> <span class="n">modules</span> <span class="k">=</span> <span class="nc">Seq</span><span class="o">(</span>
+</span><span class='line'>    <span class="nc">DoEverythingModule</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">override</span> <span class="k">def</span> <span class="n">configureHttp</span><span class="o">(</span><span class="n">router</span><span class="k">:</span> <span class="kt">HttpRouter</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">router</span>
+</span><span class='line'>      <span class="o">.</span><span class="n">filter</span><span class="o">[</span><span class="kt">AccessLoggingFilter</span><span class="o">[</span><span class="kt">Request</span><span class="o">]]</span>
+</span><span class='line'>      <span class="o">.</span><span class="n">filter</span><span class="o">[</span><span class="kt">CommonFilters</span><span class="o">]</span>
+</span><span class='line'>      <span class="o">.</span><span class="n">add</span><span class="o">[</span><span class="kt">ExampleController</span><span class="o">]</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<div></div>
+
+
+<h4>Per-controller Filters</h4>
+
+<p>It is also possible to add filterd per controller, using <code>router#add[F1 &lt;: HttpFilter, C &lt;: Controller]</code>. These filters will apply to all routes in the Controller.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">DoEverythingModule</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">ExampleController</span>
 </span><span class='line'><span class="k">import</span> <span class="nn">ExampleFilter</span>
 </span><span class='line'><span class="k">import</span> <span class="nn">com.twitter.finagle.http.Request</span>
 </span><span class='line'><span class="k">import</span> <span class="nn">com.twitter.finatra.http.filters.AccessLoggingFilter</span>
@@ -194,9 +212,10 @@
 </span><span class='line'>    <span class="nc">DoEverythingModule</span><span class="o">)</span>
 </span><span class='line'>
 </span><span class='line'>  <span class="k">override</span> <span class="k">def</span> <span class="n">configureHttp</span><span class="o">(</span><span class="n">router</span><span class="k">:</span> <span class="kt">HttpRouter</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>    <span class="n">router</span><span class="o">.</span>
-</span><span class='line'>      <span class="n">filter</span><span class="o">[</span><span class="kt">AccessLoggingFilter</span><span class="o">[</span><span class="kt">Request</span><span class="o">]].</span>
-</span><span class='line'>      <span class="n">add</span><span class="o">[</span><span class="kt">ExampleFilter</span>, <span class="kt">ExampleController</span><span class="o">]</span>
+</span><span class='line'>    <span class="n">router</span>
+</span><span class='line'>      <span class="o">.</span><span class="n">filterBeforeRouting</span><span class="o">[</span><span class="kt">SpecialFilter</span><span class="o">]</span>
+</span><span class='line'>      <span class="o">.</span><span class="n">filter</span><span class="o">[</span><span class="kt">AccessLoggingFilter</span><span class="o">[</span><span class="kt">Request</span><span class="o">]].</span>
+</span><span class='line'>      <span class="o">.</span><span class="n">add</span><span class="o">[</span><span class="kt">ExampleFilter</span>, <span class="kt">ExampleController</span><span class="o">]</span>
 </span><span class='line'>  <span class="o">}</span>
 </span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
@@ -205,9 +224,13 @@
 <div></div>
 
 
-<p>In both cases, we are again applying the filter <em>by type</em> allowing the framework to instantiate instances of the filters.</p>
+<p>Currently, <code>router#add</code> supports inlining up to ten (10) filters before a controller. If you need to include more than ten filters please consider combining them with <a href="https://github.com/twitter/finatra/blob/master/utils/src/main/scala/com/twitter/finatra/filters/MergedFilter.scala">com.twitter.finatra.filters.MergedFilter</a> (in <a href="https://github.com/twitter/finatra/tree/master/utils">finatra/utils</a>) in the same manner as <a href="https://github.com/twitter/finatra/blob/master/http/src/main/scala/com/twitter/finatra/http/filters/CommonFilters.scala"><code>com.twitter.finatra.http.filters.CommonFilters</code></a> then using the combined filter in your call to <code>router#add</code>.</p>
 
-<p>Finatra composes some commonly used filters into <a href="https://github.com/twitter/finatra/blob/master/http/src/main/scala/com/twitter/finatra/http/filters/CommonFilters.scala"><code>com.twitter.finatra.http.filters.CommonFilters</code></a>. <code>CommonFilters</code> can be added in the same manner as any other filter, e.g.,</p>
+<p>In all the above usages, we are applying the filter <em>by type</em> allowing the framework to instantiate instances of the filters. However all of these methods supporting passing instances.</p>
+
+<h4>Per-route Filters</h4>
+
+<p>Additionally, you can define filters <em>inside</em> of a Controller per-route, e.g.,</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -216,18 +239,44 @@
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">override</span> <span class="n">configureHttp</span><span class="o">(</span><span class="n">router</span><span class="k">:</span> <span class="kt">HttpRouter</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>  <span class="n">router</span><span class="o">.</span>
-</span><span class='line'>    <span class="n">filter</span><span class="o">[</span><span class="kt">CommonFilters</span><span class="o">].</span>
-</span><span class='line'>    <span class="n">filter</span><span class="o">[</span><span class="kt">ExampleFilter</span><span class="o">].</span>
-</span><span class='line'>    <span class="n">add</span><span class="o">[</span><span class="kt">MyController1</span><span class="o">].</span>
-</span><span class='line'>    <span class="n">add</span><span class="o">[</span><span class="kt">MyController2</span><span class="o">]</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">class</span> <span class="nc">ExampleController</span> <span class="nd">@Inject</span><span class="o">()(</span>
+</span><span class='line'>  <span class="n">exampleService</span><span class="k">:</span> <span class="kt">ExampleService</span>
+</span><span class='line'><span class="o">)</span> <span class="k">extends</span> <span class="nc">Controller</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">filter</span><span class="o">[</span><span class="kt">ExampleFilter</span><span class="o">].</span><span class="n">get</span><span class="o">(</span><span class="s">&quot;/ping&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">request</span><span class="k">:</span> <span class="kt">Request</span> <span class="o">=&gt;</span>
+</span><span class='line'>    <span class="s">&quot;pong&quot;</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">filter</span><span class="o">[</span><span class="kt">ExampleFilter</span><span class="o">]</span>
+</span><span class='line'>    <span class="o">.</span><span class="n">filter</span><span class="o">[</span><span class="kt">AnotherExampleFilter</span><span class="o">]</span>
+</span><span class='line'>    <span class="o">.</span><span class="n">get</span><span class="o">(</span><span class="s">&quot;/name&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">request</span><span class="k">:</span> <span class="kt">Request</span> <span class="o">=&gt;</span>
+</span><span class='line'>    <span class="n">response</span><span class="o">.</span><span class="n">ok</span><span class="o">.</span><span class="n">body</span><span class="o">(</span><span class="s">&quot;Bob&quot;</span><span class="o">)</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">filter</span><span class="o">(</span><span class="k">new</span> <span class="nc">OtherFilter</span><span class="o">).</span><span class="n">post</span><span class="o">(</span><span class="s">&quot;/foo&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">request</span><span class="k">:</span> <span class="kt">Request</span> <span class="o">=&gt;</span>
+</span><span class='line'>    <span class="n">exampleService</span><span class="o">.</span><span class="k">do</span><span class="o">(</span><span class="n">request</span><span class="o">)</span>
+</span><span class='line'>    <span class="s">&quot;bar&quot;</span>
+</span><span class='line'>  <span class="o">}</span>
 </span><span class='line'><span class="o">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
 <div></div>
 
+
+<p>As you can see, you can choose to apply the filter either by type or provide an instance. You can also chain <code>controller#filter</code> calls arbitrarily deep.</p>
 
 <h2><a class="anchor" name="request-scope" href="#request-scope">Request Scope</a></h2>
 
