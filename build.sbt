@@ -66,8 +66,8 @@ lazy val scalaCompilerOptions = scalacOptions ++= Seq(
 )
 
 lazy val javaCompilerOptions = javacOptions ++= Seq(
-  "-source", "1.7",
-  "-target", "1.7",
+  "-source", "1.8",
+  "-target", "1.8",
   "-Xlint:unchecked"
 )
 
@@ -581,7 +581,7 @@ lazy val tinyUrl = (project in file("examples/tiny-url")).
     injectCore % "test->test"
   )
 
-lazy val exampleInjectJavaServer = (project in file("inject/examples/java-server")).
+lazy val exampleInjectJavaServer = (project in file("examples/java-server")).
   settings(exampleServerBuildSettings).
   settings(
     name := "java-server",
@@ -591,6 +591,8 @@ lazy val exampleInjectJavaServer = (project in file("inject/examples/java-server
     )
   ).
   dependsOn(
+    http,
+    http % "test->test",
     slf4j,
     injectServer,
     injectServer % "test->test",
