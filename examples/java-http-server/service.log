@@ -1,0 +1,173 @@
+2016-05-19 15:56:22,188 INF                  HelloWorldServer          Process started
+2016-05-19 15:56:44,961 INF                  HelloWorldServer          Process started
+2016-05-19 15:56:47,174 INF                  HelloWorldServer          Resolving Finagle clients before warmup
+2016-05-19 15:56:47,187 INF                  HelloWorldServer          Done resolving clients: [].
+2016-05-19 15:56:47,189 INF                  FinagleBuildRevision$     Resolved Finagle build revision: (rev=4f353f2d009ea37dc853bbee875a04cf8f720b52)
+2016-05-19 15:56:47,781 INF                  HelloWorldServer          Warming up.
+2016-05-19 15:56:47,951 INF                  HttpRouter                Adding routes
+GET     /hello
+GET     /goodbye
+2016-05-19 15:56:47,960 INF                  HelloWorldServer           => com.twitter.server.handler.AdminRedirectHandler
+2016-05-19 15:56:47,961 INF                  HelloWorldServer          /admin => com.twitter.server.handler.SummaryHandler
+2016-05-19 15:56:47,961 INF                  HelloWorldServer          /admin/server_info => com.twitter.finagle.Filter$$anon$1
+2016-05-19 15:56:47,961 INF                  HelloWorldServer          /admin/contention => com.twitter.finagle.Filter$$anon$1
+2016-05-19 15:56:47,962 INF                  HelloWorldServer          /admin/lint => com.twitter.server.handler.LintHandler
+2016-05-19 15:56:47,962 INF                  HelloWorldServer          /admin/lint.json => com.twitter.server.handler.LintHandler
+2016-05-19 15:56:47,962 INF                  HelloWorldServer          /admin/threads => com.twitter.server.handler.ThreadsHandler
+2016-05-19 15:56:47,962 INF                  HelloWorldServer          /admin/threads.json => com.twitter.server.handler.ThreadsHandler
+2016-05-19 15:56:47,962 INF                  HelloWorldServer          /admin/announcer => com.twitter.finagle.Filter$$anon$1
+2016-05-19 15:56:47,963 INF                  HelloWorldServer          /admin/dtab => com.twitter.finagle.Filter$$anon$1
+2016-05-19 15:56:47,963 INF                  HelloWorldServer          /admin/pprof/heap => com.twitter.server.handler.HeapResourceHandler
+2016-05-19 15:56:47,963 INF                  HelloWorldServer          /admin/pprof/profile => com.twitter.server.handler.ProfileResourceHandler
+2016-05-19 15:56:47,963 INF                  HelloWorldServer          /admin/pprof/contention => com.twitter.server.handler.ProfileResourceHandler
+2016-05-19 15:56:47,963 INF                  HelloWorldServer          /admin/ping => com.twitter.server.handler.ReplyHandler
+2016-05-19 15:56:47,963 INF                  HelloWorldServer          /admin/shutdown => com.twitter.server.handler.ShutdownHandler
+2016-05-19 15:56:47,964 INF                  HelloWorldServer          /admin/tracing => com.twitter.server.handler.TracingHandler
+2016-05-19 15:56:47,964 INF                  HelloWorldServer          /admin/events => com.twitter.server.handler.EventsHandler
+2016-05-19 15:56:47,964 INF                  HelloWorldServer          /admin/events/record/ => com.twitter.server.handler.EventRecordingHandler
+2016-05-19 15:56:47,964 INF                  HelloWorldServer          /admin/logging => com.twitter.server.handler.LoggingHandler
+2016-05-19 15:56:47,964 INF                  HelloWorldServer          /admin/metrics => com.twitter.server.handler.MetricQueryHandler
+2016-05-19 15:56:47,964 INF                  HelloWorldServer          /admin/clients/ => com.twitter.server.handler.ClientRegistryHandler
+2016-05-19 15:56:47,965 INF                  HelloWorldServer          /admin/servers/ => com.twitter.server.handler.ServerRegistryHandler
+2016-05-19 15:56:47,965 INF                  HelloWorldServer          /admin/files/ => com.twitter.server.handler.ResourceHandler
+2016-05-19 15:56:47,965 INF                  HelloWorldServer          /admin/registry.json => com.twitter.server.handler.RegistryHandler
+2016-05-19 15:56:47,965 INF                  HelloWorldServer          /favicon.ico => com.twitter.server.handler.ResourceHandler
+2016-05-19 15:56:47,965 INF                  HelloWorldServer          /admin/histograms => com.twitter.server.handler.HistogramQueryHandler
+2016-05-19 15:56:47,966 INF                  HelloWorldServer          /admin/histograms.json => com.twitter.server.handler.HistogramQueryHandler
+2016-05-19 15:56:48,364 INF                  DefaultTracer$            Tracer: com.twitter.finagle.zipkin.thrift.SamplingTracer
+2016-05-19 15:56:48,376 INF                  HelloWorldServer          http server started on port: 8888
+2016-05-19 15:56:48,378 INF                  HelloWorldServer          Enabling health endpoint on port 9990
+2016-05-19 15:56:48,378 INF                  HelloWorldServer          App started.
+2016-05-19 15:56:48,379 INF                  HelloWorldServer          Startup complete, server ready.
+2016-05-19 15:58:05,315 INF                  AccessLoggingFilter       0:0:0:0:0:0:0:1 - - [19/May/2016:22:58:05 +0000] "GET /hello HTTP/1.1" 200 10 98 "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.86 Safari/537.36"
+2016-05-19 15:58:20,434 INF                  AccessLoggingFilter       0:0:0:0:0:0:0:1 - - [19/May/2016:22:58:20 +0000] "GET /hello HTTP/1.1" 200 10 0 "Wget/1.17.1 (darwin15.2.0)"
+2016-05-19 15:58:25,423 INF                  AccessLoggingFilter       0:0:0:0:0:0:0:1 - - [19/May/2016:22:58:25 +0000] "GET /hello HTTP/1.1" 200 10 0 "curl/7.43.0"
+2016-05-19 15:58:44,305 INF                  AccessLoggingFilter       0:0:0:0:0:0:0:1 - - [19/May/2016:22:58:44 +0000] "GET /hello?name=jduan HTTP/1.1" 200 11 0 "curl/7.43.0"
+2016-05-19 16:00:19,616 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=10 HTTP/1.1" 200 8 0 "hackney/1.6.0"
+2016-05-19 16:00:19,617 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=7 HTTP/1.1" 200 7 0 "hackney/1.6.0"
+2016-05-19 16:00:19,625 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=18 HTTP/1.1" 200 8 0 "hackney/1.6.0"
+2016-05-19 16:00:19,625 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=9 HTTP/1.1" 200 7 0 "hackney/1.6.0"
+2016-05-19 16:00:19,626 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=11 HTTP/1.1" 200 8 1 "hackney/1.6.0"
+2016-05-19 16:00:19,628 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=12 HTTP/1.1" 200 8 0 "hackney/1.6.0"
+2016-05-19 16:00:19,628 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=2 HTTP/1.1" 200 7 0 "hackney/1.6.0"
+2016-05-19 16:00:19,628 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=16 HTTP/1.1" 200 8 0 "hackney/1.6.0"
+2016-05-19 16:00:19,631 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=5 HTTP/1.1" 200 7 0 "hackney/1.6.0"
+2016-05-19 16:00:19,632 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=17 HTTP/1.1" 200 8 0 "hackney/1.6.0"
+2016-05-19 16:00:19,634 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=13 HTTP/1.1" 200 8 0 "hackney/1.6.0"
+2016-05-19 16:00:19,636 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=19 HTTP/1.1" 200 8 0 "hackney/1.6.0"
+2016-05-19 16:00:19,636 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=8 HTTP/1.1" 200 7 0 "hackney/1.6.0"
+2016-05-19 16:00:19,637 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=14 HTTP/1.1" 200 8 0 "hackney/1.6.0"
+2016-05-19 16:00:19,641 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=1 HTTP/1.1" 200 7 2 "hackney/1.6.0"
+2016-05-19 16:00:19,644 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=3 HTTP/1.1" 200 7 0 "hackney/1.6.0"
+2016-05-19 16:00:19,646 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=6 HTTP/1.1" 200 7 0 "hackney/1.6.0"
+2016-05-19 16:00:19,646 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=4 HTTP/1.1" 200 7 0 "hackney/1.6.0"
+2016-05-19 16:00:19,648 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=15 HTTP/1.1" 200 8 0 "hackney/1.6.0"
+2016-05-19 16:00:19,649 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:00:19 +0000] "GET /hello?name=20 HTTP/1.1" 200 8 10 "hackney/1.6.0"
+2016-05-19 16:09:28,362 INF                  HelloWorldServer          Process started
+2016-05-19 16:09:29,411 INF                  HelloWorldServer          Resolving Finagle clients before warmup
+2016-05-19 16:09:29,415 INF                  HelloWorldServer          Done resolving clients: [].
+2016-05-19 16:09:29,417 INF                  FinagleBuildRevision$     Resolved Finagle build revision: (rev=4f353f2d009ea37dc853bbee875a04cf8f720b52)
+2016-05-19 16:10:05,035 INF                  HelloWorldServer          Process started
+2016-05-19 16:10:06,430 INF                  HelloWorldServer          Resolving Finagle clients before warmup
+2016-05-19 16:10:06,440 INF                  HelloWorldServer          Done resolving clients: [].
+2016-05-19 16:10:06,441 INF                  FinagleBuildRevision$     Resolved Finagle build revision: (rev=4f353f2d009ea37dc853bbee875a04cf8f720b52)
+2016-05-19 16:10:06,630 INF                  HelloWorldServer          Warming up.
+2016-05-19 16:10:06,714 INF                  HttpRouter                Adding routes
+GET     /hello
+GET     /goodbye
+2016-05-19 16:10:06,720 INF                  HelloWorldServer           => com.twitter.server.handler.AdminRedirectHandler
+2016-05-19 16:10:06,721 INF                  HelloWorldServer          /admin => com.twitter.server.handler.SummaryHandler
+2016-05-19 16:10:06,721 INF                  HelloWorldServer          /admin/server_info => com.twitter.finagle.Filter$$anon$1
+2016-05-19 16:10:06,721 INF                  HelloWorldServer          /admin/contention => com.twitter.finagle.Filter$$anon$1
+2016-05-19 16:10:06,721 INF                  HelloWorldServer          /admin/lint => com.twitter.server.handler.LintHandler
+2016-05-19 16:10:06,721 INF                  HelloWorldServer          /admin/lint.json => com.twitter.server.handler.LintHandler
+2016-05-19 16:10:06,721 INF                  HelloWorldServer          /admin/threads => com.twitter.server.handler.ThreadsHandler
+2016-05-19 16:10:06,721 INF                  HelloWorldServer          /admin/threads.json => com.twitter.server.handler.ThreadsHandler
+2016-05-19 16:10:06,721 INF                  HelloWorldServer          /admin/announcer => com.twitter.finagle.Filter$$anon$1
+2016-05-19 16:10:06,721 INF                  HelloWorldServer          /admin/dtab => com.twitter.finagle.Filter$$anon$1
+2016-05-19 16:10:06,721 INF                  HelloWorldServer          /admin/pprof/heap => com.twitter.server.handler.HeapResourceHandler
+2016-05-19 16:10:06,721 INF                  HelloWorldServer          /admin/pprof/profile => com.twitter.server.handler.ProfileResourceHandler
+2016-05-19 16:10:06,721 INF                  HelloWorldServer          /admin/pprof/contention => com.twitter.server.handler.ProfileResourceHandler
+2016-05-19 16:10:06,722 INF                  HelloWorldServer          /admin/ping => com.twitter.server.handler.ReplyHandler
+2016-05-19 16:10:06,722 INF                  HelloWorldServer          /admin/shutdown => com.twitter.server.handler.ShutdownHandler
+2016-05-19 16:10:06,722 INF                  HelloWorldServer          /admin/tracing => com.twitter.server.handler.TracingHandler
+2016-05-19 16:10:06,722 INF                  HelloWorldServer          /admin/events => com.twitter.server.handler.EventsHandler
+2016-05-19 16:10:06,722 INF                  HelloWorldServer          /admin/events/record/ => com.twitter.server.handler.EventRecordingHandler
+2016-05-19 16:10:06,722 INF                  HelloWorldServer          /admin/logging => com.twitter.server.handler.LoggingHandler
+2016-05-19 16:10:06,722 INF                  HelloWorldServer          /admin/metrics => com.twitter.server.handler.MetricQueryHandler
+2016-05-19 16:10:06,723 INF                  HelloWorldServer          /admin/clients/ => com.twitter.server.handler.ClientRegistryHandler
+2016-05-19 16:10:06,723 INF                  HelloWorldServer          /admin/servers/ => com.twitter.server.handler.ServerRegistryHandler
+2016-05-19 16:10:06,723 INF                  HelloWorldServer          /admin/files/ => com.twitter.server.handler.ResourceHandler
+2016-05-19 16:10:06,723 INF                  HelloWorldServer          /admin/registry.json => com.twitter.server.handler.RegistryHandler
+2016-05-19 16:10:06,723 INF                  HelloWorldServer          /favicon.ico => com.twitter.server.handler.ResourceHandler
+2016-05-19 16:10:06,723 INF                  HelloWorldServer          /admin/histograms => com.twitter.server.handler.HistogramQueryHandler
+2016-05-19 16:10:06,723 INF                  HelloWorldServer          /admin/histograms.json => com.twitter.server.handler.HistogramQueryHandler
+2016-05-19 16:10:06,980 INF                  DefaultTracer$            Tracer: com.twitter.finagle.zipkin.thrift.SamplingTracer
+2016-05-19 16:10:06,987 INF                  HelloWorldServer          http server started on port: 8888
+2016-05-19 16:10:06,988 INF                  HelloWorldServer          Enabling health endpoint on port 9990
+2016-05-19 16:10:06,988 INF                  HelloWorldServer          App started.
+2016-05-19 16:10:06,989 INF                  HelloWorldServer          Startup complete, server ready.
+2016-05-19 16:10:24,246 INF                  AccessLoggingFilter       0:0:0:0:0:0:0:1 - - [19/May/2016:23:10:24 +0000] "GET /hello?name=jduan HTTP/1.1" 200 45 5053 "curl/7.43.0"
+2016-05-19 16:10:43,130 INF                  AccessLoggingFilter       0:0:0:0:0:0:0:1 - - [19/May/2016:23:10:43 +0000] "GET /hello?name=jduan HTTP/1.1" 200 45 5004 "curl/7.43.0"
+2016-05-19 16:11:16,672 INF                  HelloWorldServer          Process started
+2016-05-19 16:11:17,896 INF                  HelloWorldServer          Resolving Finagle clients before warmup
+2016-05-19 16:11:17,901 INF                  HelloWorldServer          Done resolving clients: [].
+2016-05-19 16:11:17,905 INF                  FinagleBuildRevision$     Resolved Finagle build revision: (rev=4f353f2d009ea37dc853bbee875a04cf8f720b52)
+2016-05-19 16:11:18,070 INF                  HelloWorldServer          Warming up.
+2016-05-19 16:11:18,146 INF                  HttpRouter                Adding routes
+GET     /hello
+GET     /goodbye
+2016-05-19 16:11:18,152 INF                  HelloWorldServer           => com.twitter.server.handler.AdminRedirectHandler
+2016-05-19 16:11:18,152 INF                  HelloWorldServer          /admin => com.twitter.server.handler.SummaryHandler
+2016-05-19 16:11:18,152 INF                  HelloWorldServer          /admin/server_info => com.twitter.finagle.Filter$$anon$1
+2016-05-19 16:11:18,152 INF                  HelloWorldServer          /admin/contention => com.twitter.finagle.Filter$$anon$1
+2016-05-19 16:11:18,152 INF                  HelloWorldServer          /admin/lint => com.twitter.server.handler.LintHandler
+2016-05-19 16:11:18,152 INF                  HelloWorldServer          /admin/lint.json => com.twitter.server.handler.LintHandler
+2016-05-19 16:11:18,152 INF                  HelloWorldServer          /admin/threads => com.twitter.server.handler.ThreadsHandler
+2016-05-19 16:11:18,152 INF                  HelloWorldServer          /admin/threads.json => com.twitter.server.handler.ThreadsHandler
+2016-05-19 16:11:18,152 INF                  HelloWorldServer          /admin/announcer => com.twitter.finagle.Filter$$anon$1
+2016-05-19 16:11:18,153 INF                  HelloWorldServer          /admin/dtab => com.twitter.finagle.Filter$$anon$1
+2016-05-19 16:11:18,153 INF                  HelloWorldServer          /admin/pprof/heap => com.twitter.server.handler.HeapResourceHandler
+2016-05-19 16:11:18,153 INF                  HelloWorldServer          /admin/pprof/profile => com.twitter.server.handler.ProfileResourceHandler
+2016-05-19 16:11:18,153 INF                  HelloWorldServer          /admin/pprof/contention => com.twitter.server.handler.ProfileResourceHandler
+2016-05-19 16:11:18,153 INF                  HelloWorldServer          /admin/ping => com.twitter.server.handler.ReplyHandler
+2016-05-19 16:11:18,153 INF                  HelloWorldServer          /admin/shutdown => com.twitter.server.handler.ShutdownHandler
+2016-05-19 16:11:18,153 INF                  HelloWorldServer          /admin/tracing => com.twitter.server.handler.TracingHandler
+2016-05-19 16:11:18,153 INF                  HelloWorldServer          /admin/events => com.twitter.server.handler.EventsHandler
+2016-05-19 16:11:18,153 INF                  HelloWorldServer          /admin/events/record/ => com.twitter.server.handler.EventRecordingHandler
+2016-05-19 16:11:18,153 INF                  HelloWorldServer          /admin/logging => com.twitter.server.handler.LoggingHandler
+2016-05-19 16:11:18,153 INF                  HelloWorldServer          /admin/metrics => com.twitter.server.handler.MetricQueryHandler
+2016-05-19 16:11:18,153 INF                  HelloWorldServer          /admin/clients/ => com.twitter.server.handler.ClientRegistryHandler
+2016-05-19 16:11:18,154 INF                  HelloWorldServer          /admin/servers/ => com.twitter.server.handler.ServerRegistryHandler
+2016-05-19 16:11:18,154 INF                  HelloWorldServer          /admin/files/ => com.twitter.server.handler.ResourceHandler
+2016-05-19 16:11:18,154 INF                  HelloWorldServer          /admin/registry.json => com.twitter.server.handler.RegistryHandler
+2016-05-19 16:11:18,154 INF                  HelloWorldServer          /favicon.ico => com.twitter.server.handler.ResourceHandler
+2016-05-19 16:11:18,154 INF                  HelloWorldServer          /admin/histograms => com.twitter.server.handler.HistogramQueryHandler
+2016-05-19 16:11:18,154 INF                  HelloWorldServer          /admin/histograms.json => com.twitter.server.handler.HistogramQueryHandler
+2016-05-19 16:11:18,512 INF                  DefaultTracer$            Tracer: com.twitter.finagle.zipkin.thrift.SamplingTracer
+2016-05-19 16:11:18,526 INF                  HelloWorldServer          http server started on port: 8888
+2016-05-19 16:11:18,527 INF                  HelloWorldServer          Enabling health endpoint on port 9990
+2016-05-19 16:11:18,527 INF                  HelloWorldServer          App started.
+2016-05-19 16:11:18,529 INF                  HelloWorldServer          Startup complete, server ready.
+2016-05-19 16:11:23,842 INF                  AccessLoggingFilter       0:0:0:0:0:0:0:1 - - [19/May/2016:23:11:23 +0000] "GET /hello?name=jduan HTTP/1.1" 200 45 5050 "curl/7.43.0"
+2016-05-19 16:11:42,656 INF                  AccessLoggingFilter       0:0:0:0:0:0:0:1 - - [19/May/2016:23:11:42 +0000] "GET /hello?name=jduan HTTP/1.1" 200 45 5005 "curl/7.43.0"
+2016-05-19 16:12:07,500 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:07 +0000] "GET /hello?name=12 HTTP/1.1" 200 45 5006 "hackney/1.6.0"
+2016-05-19 16:12:07,508 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:07 +0000] "GET /hello?name=1 HTTP/1.1" 200 45 5007 "hackney/1.6.0"
+2016-05-19 16:12:07,508 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:07 +0000] "GET /hello?name=18 HTTP/1.1" 200 45 5007 "hackney/1.6.0"
+2016-05-19 16:12:07,512 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:07 +0000] "GET /hello?name=9 HTTP/1.1" 200 45 5008 "hackney/1.6.0"
+2016-05-19 16:12:07,512 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:07 +0000] "GET /hello?name=16 HTTP/1.1" 200 45 5007 "hackney/1.6.0"
+2016-05-19 16:12:07,513 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:07 +0000] "GET /hello?name=15 HTTP/1.1" 200 45 5011 "hackney/1.6.0"
+2016-05-19 16:12:07,516 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:07 +0000] "GET /hello?name=6 HTTP/1.1" 200 45 5008 "hackney/1.6.0"
+2016-05-19 16:12:07,517 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:07 +0000] "GET /hello?name=10 HTTP/1.1" 200 45 5012 "hackney/1.6.0"
+2016-05-19 16:12:12,510 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:12 +0000] "GET /hello?name=11 HTTP/1.1" 200 45 5005 "hackney/1.6.0"
+2016-05-19 16:12:12,514 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:12 +0000] "GET /hello?name=5 HTTP/1.1" 200 45 5003 "hackney/1.6.0"
+2016-05-19 16:12:12,522 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:12 +0000] "GET /hello?name=14 HTTP/1.1" 200 45 5004 "hackney/1.6.0"
+2016-05-19 16:12:12,522 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:12 +0000] "GET /hello?name=13 HTTP/1.1" 200 45 5003 "hackney/1.6.0"
+2016-05-19 16:12:12,523 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:12 +0000] "GET /hello?name=2 HTTP/1.1" 200 45 5008 "hackney/1.6.0"
+2016-05-19 16:12:12,523 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:12 +0000] "GET /hello?name=17 HTTP/1.1" 200 45 5008 "hackney/1.6.0"
+2016-05-19 16:12:12,523 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:12 +0000] "GET /hello?name=8 HTTP/1.1" 200 45 5012 "hackney/1.6.0"
+2016-05-19 16:12:12,522 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:12 +0000] "GET /hello?name=7 HTTP/1.1" 200 45 5005 "hackney/1.6.0"
+2016-05-19 16:12:17,518 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:17 +0000] "GET /hello?name=20 HTTP/1.1" 200 45 5006 "hackney/1.6.0"
+2016-05-19 16:12:17,518 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:17 +0000] "GET /hello?name=19 HTTP/1.1" 200 45 5002 "hackney/1.6.0"
+2016-05-19 16:12:17,532 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:17 +0000] "GET /hello?name=3 HTTP/1.1" 200 45 5006 "hackney/1.6.0"
+2016-05-19 16:12:17,532 INF                  AccessLoggingFilter       127.0.0.1 - - [19/May/2016:23:12:17 +0000] "GET /hello?name=4 HTTP/1.1" 200 45 5003 "hackney/1.6.0"

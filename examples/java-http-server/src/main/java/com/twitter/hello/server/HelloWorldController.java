@@ -1,9 +1,8 @@
 package com.twitter.hello.server;
 
-import javax.inject.Inject;
-
 import com.twitter.finatra.http.JavaController;
-import com.twitter.hello.HelloService;
+
+import javax.inject.Inject;
 
 public class HelloWorldController extends JavaController {
 
