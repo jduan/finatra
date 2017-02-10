@@ -6,6 +6,8 @@ import com.twitter.finatra.thrift.Controller
 import com.twitter.util.Future
 import javax.inject.Singleton
 
+import com.twitter.finatra.thrift.thriftscala.NoClientIdError
+
 @Singleton
 class CalculatorController
   extends Controller
@@ -22,6 +24,8 @@ class CalculatorController
   }
 
   override val increment = handle(Increment) { args: Increment.Args =>
-    Future.value(args.a + 1)
+//    Future.value(args.a + 1)
+    Future.exception(new RuntimeException("bam!"))
+//    Future.exception(new NoClientIdError("no client id"))
   }
 }

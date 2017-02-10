@@ -25,11 +25,13 @@ class ExceptionTranslationFilter
       case e: UnknownClientIdError =>
         Future.exception(e)
       case e: NoClientIdError =>
+        println("NoClientIdError in the filter")
         Future.exception(e)
-      case NonFatal(e) =>
-        error("Unhandled exception", e)
-        Future.exception(
-          ServerError(InternalServerError, e.getMessage))
+      case e => Future.exception(e)
+//      case NonFatal(e) =>
+//        error("Unhandled exception", e)
+//        Future.exception(
+//          ServerError(InternalServerError, e.getMessage))
     }
   }
 }
