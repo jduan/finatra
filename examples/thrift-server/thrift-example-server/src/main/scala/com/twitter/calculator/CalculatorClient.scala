@@ -3,8 +3,12 @@ package com.twitter.calculator
 import com.twitter.finagle.{Service, SimpleFilter, Thrift}
 import com.twitter.calculator.thriftscala.Calculator
 import com.twitter.calculator.thriftscala.Calculator._
+import com.twitter.finagle.service.{Backoff, RetryBudget, RetryFilter, RetryPolicy}
+import com.twitter.finagle.stats.NullStatsReceiver
 import com.twitter.finagle.thrift.ClientId
-import com.twitter.util.{Await, Future}
+import com.twitter.finagle.util.DefaultTimer
+import com.twitter.util.{Await, Future, Return, Try}
+import com.twitter.conversions.time._
 
 object CalculatorClient {
   def main(args: Array[String]): Unit = {
@@ -24,7 +28,22 @@ object CalculatorClient {
       }
     }
 
-    val filteredClient = logExceptionFilter andThen client.increment
+    val budget: RetryBudget = RetryBudget()
+    val policy: RetryPolicy[(Increment.Args, Try[Increment.Result])] =
+      RetryPolicy.backoff(Backoff.equalJittered(10.milliseconds, 10.seconds)) {
+        case (_, Return(Increment.Result(success, serverError, unknownClientIdError, noClientIdError))) if ! serverError.isEmpty => true
+        case (_, Return(Increment.Result(success, serverError, unknownClientIdError, noClientIdError))) if ! unknownClientIdError.isEmpty => true
+        case (_, Return(Increment.Result(success, serverError, unknownClientIdError, noClientIdError))) if ! noClientIdError.isEmpty => true
+        case _ => false
+      }
+    val retryFilter = new RetryFilter[Increment.Args, Increment.Result](
+      policy,
+      DefaultTimer.twitter,
+      NullStatsReceiver,
+      budget
+    )
+
+    val filteredClient = retryFilter andThen logExceptionFilter andThen client.increment
     val result = filteredClient(Increment.Args(33))
     // onFailure gets called if there's any non-declared exceptions were thrown by the server
     result.onFailure(t => println("onFailure: " + t))

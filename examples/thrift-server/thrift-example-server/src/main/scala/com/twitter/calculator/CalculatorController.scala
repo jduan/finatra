@@ -24,8 +24,9 @@ class CalculatorController
   }
 
   override val increment = handle(Increment) { args: Increment.Args =>
+    println("increment called")
 //    Future.value(args.a + 1)
-    Future.exception(new RuntimeException("bam!"))
-//    Future.exception(new NoClientIdError("no client id"))
+//    Future.exception(new RuntimeException("bam!"))
+    Future.exception(new NoClientIdError("no client id"))
   }
 }
