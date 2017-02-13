@@ -27,6 +27,9 @@ public class CalculatorClientJava {
                         if (!result.unknownClientIdError().isEmpty()) {
                             System.out.println("encountered UnknownClientIdError!");
                         }
+                        if (!result.noClientIdError().isEmpty()) {
+                            System.out.println("encountered NoClientIdError!");
+                        }
                         return result;
                     }
                 });
